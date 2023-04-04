@@ -1,5 +1,5 @@
 import api from "axios";
 
 export default api.create({
-  baseURL: `http://localhost:3000/books`,
+  baseURL: `http://localhost:3000`,
 });

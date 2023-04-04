@@ -7,15 +7,13 @@ import Register from "./components/formCreate";
 
 function App() {
   return (
-    <>
-      <BookContextProvider>
-        <Routes>
-          <Route index element={<Home />} />
+    <BookContextProvider>
+      <Routes>
+        <Route index element={<Home />} />
 
-          <Route path="/books/create" element={<Register />} />
-        </Routes>
-      </BookContextProvider>
-    </>
+        <Route path="/books/create" element={<Register />} />
+      </Routes>
+    </BookContextProvider>
   );
 }
 

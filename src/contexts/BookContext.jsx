@@ -9,11 +9,12 @@ export function BookContextProvider({ children }) {
   const [newBook, setNewBook] = useState({ name: "", author: "", gender: "" });
 
   const formSubmit = () => {
+    const { name, author, gender } = newBook;
     api
-      .post({
-        name: newBook.name,
-        author: newBook.author,
-        gender: newBook.gender,
+      .post("/books", {
+        name,
+        author,
+        gender,
       })
       .then(function (response) {
         console.log(response);
@@ -26,7 +27,7 @@ export function BookContextProvider({ children }) {
 
   function getBooks() {
     api
-      .get()
+      .get("/books")
       .then((response) => {
         setBooks(response.data);
       })
@@ -38,10 +39,10 @@ export function BookContextProvider({ children }) {
   function updateBook() {
     const { id, name, author, gender } = update;
     api
-      .put(`/${id}`, {
-        name: name,
-        author: author,
-        gender: gender,
+      .put(`/books/${id}`, {
+        name,
+        author,
+        gender,
       })
       .then((response) => {
         getBooks();
@@ -57,7 +58,7 @@ export function BookContextProvider({ children }) {
     const resposta = confirm("Are you sure you want to delete this book? ");
     if (resposta) {
       api
-        .delete(`/${id}`)
+        .delete(`/books/${id}`)
         .then(() => {
           alert("successfully deleted book");
           getBooks();
@@ -69,7 +70,8 @@ export function BookContextProvider({ children }) {
   }
 
   const handleChange = (e) => {
-    setNewBook((state) => ({ ...state, [e.target.id]: e.target.value }));
+    const value = e.target.value;
+    setNewBook((state) => ({ ...state, [e.target.name]: value }));
   };
 
   useEffect(getBooks, []);

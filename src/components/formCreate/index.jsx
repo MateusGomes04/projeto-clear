@@ -19,7 +19,7 @@ const FormCreate = () => {
                   <input
                     className="form-control"
                     type="text"
-                    id="name"
+                    name="name"
                     placeholder="Book's Name"
                     value={newBook.name}
                     onChange={handleChange}
@@ -31,7 +31,7 @@ const FormCreate = () => {
                   <input
                     className="form-control"
                     type="text"
-                    id="author"
+                    name="author"
                     placeholder="Author"
                     value={newBook.author}
                     onChange={handleChange}
@@ -44,7 +44,7 @@ const FormCreate = () => {
                     className="form-control"
                     type="text"
                     placeholder="Gender"
-                    id="gender"
+                    name="gender"
                     value={newBook.gender}
                     onChange={handleChange}
                     required
