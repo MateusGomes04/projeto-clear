@@ -7,6 +7,7 @@ export function BookContextProvider({ children }) {
   const [books, setBooks] = useState([]);
   const [update, setUpdate] = useState(null);
   const [newBook, setNewBook] = useState({ name: "", author: "", gender: "" });
+  const [bookIds, setBookIds] = useState([]);
 
   const formSubmit = () => {
     const { name, author, gender } = newBook;
@@ -25,11 +26,54 @@ export function BookContextProvider({ children }) {
       });
   };
 
+  function handleAddBookIds(selected_book) {
+    if (selected_book.active) {
+      setBookIds((state) => [...state, selected_book.id]);
+    } else {
+      let newBooksIds = bookIds.filter((id) => id !== selected_book.id);
+      setBookIds(newBooksIds);
+    }
+  }
+  console.log(bookIds);
+  const handleAllCheckeds = (e) => {
+    const setAll = books.map((b) => {
+      b.active = e.target.checked;
+      return b;
+    });
+
+    if (e.target.checked) {
+      let allBooksIds = books.map((b) => b.id);
+      setBookIds(allBooksIds);
+    } else {
+      setBookIds([]);
+    }
+    console.log(e.target.checked);
+    setBooks(setAll);
+  };
+
+  const handleChecked = (book) => {
+    let selected_book;
+    const setB = books.map((b) => {
+      if (b.id == book.id) {
+        b.active = !b.active;
+        selected_book = b;
+      }
+      return b;
+    });
+
+    setBooks(setB);
+    handleAddBookIds(selected_book);
+  };
+
   function getBooks() {
     api
       .get("/books")
       .then((response) => {
-        setBooks(response.data);
+        const books_ = response.data.map((book) => {
+          book.active = false;
+          return book;
+        });
+        setBooks(books_);
       })
       .catch((err) => {
         console.log(err);
@@ -54,11 +98,11 @@ export function BookContextProvider({ children }) {
       });
   }
 
-  function deleteBook(id) {
+  function deleteBook() {
     const resposta = confirm("Are you sure you want to delete this book? ");
     if (resposta) {
       api
-        .delete(`/books/${id}`)
+        .delete(`/books/${bookIds}`)
         .then(() => {
           alert("successfully deleted book");
           getBooks();
@@ -88,6 +132,9 @@ export function BookContextProvider({ children }) {
         newBook,
         setNewBook,
         formSubmit,
+        handleChecked,
+        handleAllCheckeds,
+        bookIds,
       }}
     >
       {children}

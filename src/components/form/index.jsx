@@ -4,19 +4,40 @@ import { useContext } from "react";
 import { BookContext } from "../../contexts/BookContext";
 
 function TableBooks() {
-  const { books, deleteBook, update, setUpdate, updateBook } =
-    useContext(BookContext);
+  const {
+    books,
+    deleteBook,
+    update,
+    setUpdate,
+    updateBook,
+    handleChecked,
+    handleAllCheckeds,
+    bookIds,
+  } = useContext(BookContext);
   return (
     <>
-      <h2 style={{ color: "#fff" }}>TiaoBooks Ltda</h2>
+      <h2>TiaoBooks Ltda</h2>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
+            <th>
+              <input type="checkbox" onClick={(e) => handleAllCheckeds(e)} />
+            </th>
             <th>No</th>
             <th>Name</th>
             <th>Author</th>
             <th>Gender</th>
-            <th></th>
+            <th>
+              {bookIds && bookIds.length > 0 ? (
+                <Button variant="danger" onClick={deleteBook}>
+                  Destroy
+                </Button>
+              ) : (
+                <button>
+                  <a href="/books/create">Register Books</a>
+                </button>
+              )}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -80,6 +101,13 @@ function TableBooks() {
               </tr>
             ) : (
               <tr key={book.id}>
+                <td>
+                  <input
+                    checked={book.active}
+                    onClick={() => handleChecked(book)}
+                    type="checkbox"
+                  />
+                </td>
                 <td>{book.id}</td>
                 <td>{book.name}</td>
                 <td>{book.author}</td>
@@ -98,21 +126,13 @@ function TableBooks() {
                     }}
                   >
                     Update
-                  </Button>{" "}
-                  <Button variant="danger" onClick={() => deleteBook(book.id)}>
-                    Destroy
-                  </Button>{" "}
+                  </Button>
                 </td>
               </tr>
             )
           )}
         </tbody>
       </Table>
-      <div>
-        <button>
-          <a href="/books/create">Register Books</a>
-        </button>
-      </div>
     </>
   );
 }
