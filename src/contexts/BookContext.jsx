@@ -34,7 +34,7 @@ export function BookContextProvider({ children }) {
       setBookIds(newBooksIds);
     }
   }
-  console.log(bookIds);
+
   const handleAllCheckeds = (e) => {
     const setAll = books.map((b) => {
       b.active = e.target.checked;

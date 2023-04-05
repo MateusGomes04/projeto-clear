@@ -14,7 +14,7 @@ const FormCreate = () => {
             <div className="form-items">
               <h3>Register Books</h3>
               <p>Fill in the data below.</p>
-              <form onSubmit={formSubmit}>
+              <form onSubmit={(e) => formSubmit(e.preventDefault())}>
                 <div className="col-md-12">
                   <input
                     className="form-control"

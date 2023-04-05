@@ -33,9 +33,15 @@ function TableBooks() {
                   Destroy
                 </Button>
               ) : (
-                <button>
-                  <a href="/books/create">Register Books</a>
-                </button>
+                <Button>
+                  <a
+                    className="href"
+                    style={{ color: "#fff" }}
+                    href="/books/create"
+                  >
+                    Create
+                  </a>
+                </Button>
               )}
             </th>
           </tr>
@@ -45,6 +51,7 @@ function TableBooks() {
             update && update.id === book.id ? (
               <tr key={book.id}>
                 <th scope="row">{book.id}</th>
+                <td></td>
                 <td>
                   <input
                     value={update.name}
