@@ -1,10 +1,10 @@
 import React from "react";
-import TableBooks from "../../components/form";
+import FormLogin from "../../components/FormLogin";
 
 function Home() {
   return (
     <div>
-      <TableBooks></TableBooks>
+      <FormLogin></FormLogin>
     </div>
   );
 }

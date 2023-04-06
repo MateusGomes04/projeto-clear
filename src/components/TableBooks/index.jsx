@@ -14,6 +14,9 @@ function TableBooks() {
     handleAllCheckeds,
     bookIds,
   } = useContext(BookContext);
+
+  useEffect(getBooks, []);
+
   return (
     <>
       <h2>TiaoBooks Ltda</h2>

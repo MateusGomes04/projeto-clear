@@ -3,7 +3,7 @@ import "./style.css";
 import { useContext } from "react";
 import { BookContext } from "../../contexts/BookContext";
 
-const FormCreate = () => {
+const FormCreateBook = () => {
   const { newBook, handleChange, formSubmit } = useContext(BookContext);
 
   return (
@@ -67,4 +67,4 @@ const FormCreate = () => {
   );
 };
 
-export default FormCreate;
+export default FormCreateBook;

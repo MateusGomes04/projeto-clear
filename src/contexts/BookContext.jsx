@@ -118,7 +118,6 @@ export function BookContextProvider({ children }) {
     setNewBook((state) => ({ ...state, [e.target.name]: value }));
   };
 
-  useEffect(getBooks, []);
   return (
     <BookContext.Provider
       value={{
